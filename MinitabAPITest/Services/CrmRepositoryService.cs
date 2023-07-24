@@ -25,13 +25,8 @@ namespace MinitabAPI.Services
 
             //Get the output file path and write to it
             var outputFile = String.Format(Path.Combine(outputDirectory, "{0}.json"), customer.CustomerName);
-            byte[] encodedText = Encoding.Unicode.GetBytes(customerJson);
-            
-            using(FileStream sourceStream = new FileStream(outputFile, FileMode.OpenOrCreate, 
-                FileAccess.ReadWrite, FileShare.None, bufferSize: 4096, useAsync: true))
-            {
-                sourceStream.Write(encodedText, 0, encodedText.Length);
-            }
+
+            File.WriteAllText(outputFile, customerJson);
             return Task.CompletedTask;
         }
     }
